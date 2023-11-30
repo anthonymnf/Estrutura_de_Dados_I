@@ -25,7 +25,7 @@ int main()
   // Lendo dados
   for (int i = 0; i < QntCand; i++)
   {
-    printf("Digite as informações do candidato, na seginte ordem: Nome,Endereço, Partido,Cargo, Número de votos, dia, mes e ano da eleição\n");
+    printf("Digite as informações do candidato, na seginte ordem:\nNome,Endereço, Partido,Cargo, Número de votos, dia, mes e ano da eleição\n");
     scanf("%49[^\n]", candidatos_vet[i].nome);
     fflush(stdin);
     scanf("%49[^\n]", candidatos_vet[i].endereco);
@@ -47,11 +47,11 @@ int main()
   for (int i = 0; i < QntCand; i++)
   {
     printf("Os dados do candidato são:\n");
-    printf("%s\n", candidatos_vet[i].nome);
-    printf("%s\n", candidatos_vet[i].endereco);
-    printf("%s\n", candidatos_vet[i].partido);
-    printf("%s\n", candidatos_vet[i].cargo);
-    printf("%i\n", candidatos_vet[i].numero_de_votos);
+    printf("Nome: %s\n", candidatos_vet[i].nome);
+    printf("Endereço: %s\n", candidatos_vet[i].endereco);
+    printf("Partido: %s\n", candidatos_vet[i].partido);
+    printf("Cargo: %s\n", candidatos_vet[i].cargo);
+    printf("Votos: %i\n", candidatos_vet[i].numero_de_votos);
     printf("O dia da eleição é: %i/%s/%i\n", candidatos_vet[i].data_da_eleicao.dia, candidatos_vet[i].data_da_eleicao.mes, candidatos_vet[i].data_da_eleicao.ano);
   }
 
