@@ -19,8 +19,8 @@ struct pessoa
 
 int main()
 {
-
-  struct pessoa aluno[3];
+  typedef struct pessoa alun;
+  alun aluno[3];
   float contadorPrimeira = 0, contadorMaior = 0, contadorMenor = 10, media;
   int i, nomePrimeira = 0, nomeMaior = 0, nomeMenor = 0;
 
