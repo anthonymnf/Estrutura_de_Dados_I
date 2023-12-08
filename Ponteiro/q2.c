@@ -9,11 +9,11 @@ int main()
   prt_n2 = &n2;
   if (prt_n1 > prt_n2)
   {
-    printf("n1 tem o maior endereço. Endereço: %d", prt_n1);
+    printf("n1 tem o maior endereço. Endereço: %i", prt_n1);
   }
   else
   {
-    printf("n2 tem o maior endereço. Endereço: %d", prt_n2);
+    printf("n2 tem o maior endereço. Endereço: %i", prt_n2);
   }
   return 0;
 }
