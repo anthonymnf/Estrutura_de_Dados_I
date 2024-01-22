@@ -21,9 +21,9 @@ typedef struct receita receita;
 
 int main()
 {
-  receita receitas[2];
+  receita receitas[5];
   // ler dados
-  for (int i = 0; i < 2; i++)
+  for (int i = 0; i < 5; i++)
   {
     printf("Qual o nome da receita?\n");
     gets(receitas[i].nome);
@@ -44,7 +44,7 @@ int main()
     }
   }
   // exibir dados
-  for (int i = 0; i < 2; i++)
+  for (int i = 0; i < 5; i++)
   {
     printf("\nReceita %d\n", i + 1);
     printf("Nome: %s \n", receitas[i].nome);
