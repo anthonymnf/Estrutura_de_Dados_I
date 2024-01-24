@@ -29,6 +29,7 @@ int main()
   }
   printf("Quantidade de pares: %i", par);
   printf("\nQuantidade de impares: %i", impar);
+  free(vet);
 
   return 0;
 }

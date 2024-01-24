@@ -15,6 +15,7 @@ int main()
   printf("Vet[1] = %i\n", vet[1]);
   printf("Vet[%i] = %i\n", n - 2, vet[n - 2]);
   printf("Vet[%i] = %i", n - 1, vet[n - 1]);
+  free(vet);
 
   return 0;
 }
