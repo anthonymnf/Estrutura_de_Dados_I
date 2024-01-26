@@ -48,5 +48,7 @@ int main()
     printf("------------------------\n");
   }
 
+  free(alunos);
+
   return 0;
 }
