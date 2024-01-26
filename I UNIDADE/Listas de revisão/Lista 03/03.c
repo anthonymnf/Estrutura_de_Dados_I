@@ -26,6 +26,6 @@ int main()
   }
 
   printf("\nO maior elemento e %i e aparecceu %i vezes", maiorElem, cont);
-
+  free(vet);
   return 0;
 }
