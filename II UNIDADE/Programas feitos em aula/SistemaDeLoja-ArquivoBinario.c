@@ -8,14 +8,15 @@ struct Cliente
 
 typedef struct Cliente Cliente;
 
-
-void menu(){
+void menu()
+{
 	printf("Escolha uma opcao:\n");
 	printf("1-Cadastrar\n2-Listar\n3-Sair\n");
 	printf("-----------------------\n");
 }
 
-void cadastrar(){
+void cadastrar()
+{
 	FILE *file = fopen("cliente.b", "ab");
 	printf("Informe o nome e o valor da compra:\n");
 	Cliente cliente;
@@ -24,33 +25,39 @@ void cadastrar(){
 	fclose(file);
 }
 
-void listar(){
+void listar()
+{
 	FILE *file = fopen("cliente.b", "rb");
 	Cliente cliente;
+	printf("\nBanco de dados:\n");
 	while (fread(&cliente, sizeof(Cliente), 1, file))
 	{
 		printf("%s: %.2f\n", cliente.nome, cliente.compra);
 	}
-	
+	printf("\n");
+
 	fclose(file);
 }
 
-int main(){
+int main()
+{
 	int op;
 	menu();
-	
+
 	scanf("%d", &op);
-	while (op!=3)
+	while (op != 3)
 	{
-		if(op==1){
+		if (op == 1)
+		{
 			cadastrar();
-		}else if(op==2){
+		}
+		else if (op == 2)
+		{
 			listar();
 		}
 		menu();
 		scanf("%d", &op);
 	}
-	
+
 	return 0;
 }
-

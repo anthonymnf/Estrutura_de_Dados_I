@@ -55,11 +55,12 @@ void listar()
 {
   FILE *file = fopen("cliente.b", "rb");
   Cliente cliente;
+  printf("\nBanco de dados:\n");
   while (fread(&cliente, sizeof(Cliente), 1, file))
   {
     printf("%s: %.2f\n", cliente.nome, cliente.compra);
   }
-
+  printf("\n");
   fclose(file);
 }
 
