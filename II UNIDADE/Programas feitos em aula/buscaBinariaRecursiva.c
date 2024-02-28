@@ -2,7 +2,6 @@
 // Será feita uma busca por a matrícula de um estudante em um vetor de estudantes
 // A ideia de busca binária está presente então é possivel adaptar essa busca de qualquer forma
 // Ela funciona como a busca de um dicionário, repartindo no meio e buscando com base nisso
-// 
 
 struct estudante
 {
