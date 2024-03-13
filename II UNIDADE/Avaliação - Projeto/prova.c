@@ -159,6 +159,7 @@ void editar(int cod)
 int main()
 {
   int op;
+  // Todos essas etapas já descritas aqui serão do modo admin, dps só repetir o processo pro modo cliente
   menu();
   scanf("%d", &op);
   while (op != 0)
