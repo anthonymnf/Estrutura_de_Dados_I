@@ -186,6 +186,14 @@ typedef struct Login Login;
 
 int login()
 {
+  printf("\n---------------------\n");
+  printf("INFORMES PARA REUDISMAM\n");
+  printf("As funcoes estao divididas em dois modos: Admin Mode e Client Mode, cada uma com suas funcoes especificas\n");
+  printf("Credenciais para entrar nos modos:\n");
+  printf("- Email valido\n");
+  printf("- Para entrar no Adm Mode e Id = 1 e Senha = 11\n");
+  printf("- Para entrar no Client Mode e Id = 2 e Senha = 22\n");
+  printf("---------------------\n");
   Login user;
   int verificado = 0;
   // Chamar aqui a validação de email, essa função vai retornar um número q vou tratado com o if else
@@ -386,15 +394,7 @@ void clientMode()
 
 void mensagemDeBoasVindas()
 {
-  printf("\n---------------------\n");
-  printf("INFORMES PARA REUDISMAM\n");
-  printf("As funções estão divididas em dois modos: Admin Mode e Client Mode, cada uma com suas funcoes especificas\n");
-  printf("Credenciais para entrar nos modos:\n");
-  printf("- Email valido\n");
-  printf("- Adm Mode com Id = 1 e Senha = 11\n");
-  printf("- Client Mode com Id = 2 e Senha = 22\n");
-  printf("---------------------\n");
-  printf("Bem-vindo à VitalFarMed, onde saúde e bem-estar se encontram em cada visita! Aqui, nossa missão é cuidar de você e de sua família com dedicação e expertise. Entre em nossa loja virtual e descubra uma ampla variedade de produtos farmacêuticos de qualidade, aliados a um atendimento personalizado que faz toda a diferença. Na VitalFarMed, sua saúde é nossa prioridade número um. Juntos, vamos trilhar o caminho para uma vida mais saudável e feliz. Seja bem-vindo à sua nova casa de saúde e bem-estar!\n");
+  printf("Bem-vindo a VitalFarMed, onde saude e bem-estar se encontram em cada visita! Aqui, nossa missao e cuidar de voce e de sua familia com dedicacao e expertise. Entre em nossa loja virtual e descubra uma ampla variedade de produtos farmaceuticos de qualidade, aliados a um atendimento personalizado que faz toda a diferenca. Na VitalFarMed, sua saude e nossa prioridade numero um. Juntos, vamos trilhar o caminho para uma vida mais saudavel e feliz. Seja bem-vindo a sua nova casa de saude e bem-estar!\n");
   printf("\nVitalFarMed: Vitalizando sua vida, medicando seu bem-estar!\n");
 }
 
