@@ -23,7 +23,7 @@ typedef struct Remedio Remedio;
 // Esse será o menu e opções do modo admin
 void menuAdmin()
 {
-  printf("\nVoce e um admin!\n");
+  printf("\nBem vindo ao modo admin!\n");
   printf("\nEscolha uma opcao:\n");
   printf("1 - Cadastar remedio\n");
   printf("2 - Listar remedios\n");
@@ -177,7 +177,8 @@ void editar(int cod)
 
 struct Login
 {
-  int user;
+  char email[81];
+  int id;
   int senha;
 };
 
@@ -187,28 +188,27 @@ int login()
 {
   Login user;
   int verificado = 0;
+  // Chamar aqui a validação de email, essa função vai retornar um número q vou tratado com o if else
   while (verificado == 0)
   {
-    printf("Informe o login: ");
-    scanf("%d", &user.user);
+    printf("Informe o id: ");
+    scanf("%d", &user.id);
     printf("Informe a senha: ");
     scanf("%d", &user.senha);
 
-    if (user.user == 1 && user.senha == 11)
+    if (user.id == 1 && user.senha == 11)
     {
-      printf("Bem vindo ao modo admin!\n");
       verificado = 1;
       return 1; // Igual a entrar no modo admin
     }
-    else if (user.user == 2 && user.senha == 22)
+    else if (user.id == 2 && user.senha == 22)
     {
-      printf("Bem vindo ao modo user!\n");
       verificado = 1;
       return 2; // Igual a entrar no modo cliente/user
     }
     else
     {
-      printf("Login ou senha incorretos, tente novamente!\n");
+      printf("Id ou senha incorretos, tente novamente!\n");
     }
   }
 
@@ -263,6 +263,7 @@ void admMode()
 
 float carrinhoDeCompras(int cod, int quant)
 {
+  // Retirando remedios do estoque
   int n = tamanho();
   Remedio v[n];
   FILE *file = fopen("pharma.b", "rb");
@@ -283,6 +284,7 @@ float carrinhoDeCompras(int cod, int quant)
     fwrite(&v[i], sizeof(Remedio), 1, file);
   }
   fclose(file);
+  // Parte responsável por retornar o preço dos remedios que serão comprados
   file = fopen("pharma.b", "rb");
   Remedio a;
   int entrou = 0;
@@ -293,7 +295,7 @@ float carrinhoDeCompras(int cod, int quant)
       printf("\nNome: %s\n", a.nome);
       printf("- Codigo: %d\n", a.codigo);
       printf("- Preco: %.2f\n", a.preco);
-      printf("- Quantidade em estoque: %d\n", a.estoque);
+      printf("- Quantidade em estoque: %d\n", a.estoque + quant); // Somei de volta a quantidade do estoque pois antes de finalizar a comprar eu já retirei do pharma.b
       entrou = 1;
       return a.preco * quant;
     }
@@ -382,8 +384,23 @@ void clientMode()
   }
 }
 
+void mensagemDeBoasVindas()
+{
+  printf("\n---------------------\n");
+  printf("INFORMES PARA REUDISMAM\n");
+  printf("As funções estão divididas em dois modos: Admin Mode e Client Mode, cada uma com suas funcoes especificas\n");
+  printf("Credenciais para entrar nos modos:\n");
+  printf("- Email valido\n");
+  printf("- Adm Mode com Id = 1 e Senha = 11\n");
+  printf("- Client Mode com Id = 2 e Senha = 22\n");
+  printf("---------------------\n");
+  printf("Bem-vindo à VitalFarMed, onde saúde e bem-estar se encontram em cada visita! Aqui, nossa missão é cuidar de você e de sua família com dedicação e expertise. Entre em nossa loja virtual e descubra uma ampla variedade de produtos farmacêuticos de qualidade, aliados a um atendimento personalizado que faz toda a diferença. Na VitalFarMed, sua saúde é nossa prioridade número um. Juntos, vamos trilhar o caminho para uma vida mais saudável e feliz. Seja bem-vindo à sua nova casa de saúde e bem-estar!\n");
+  printf("\nVitalFarMed: Vitalizando sua vida, medicando seu bem-estar!\n");
+}
+
 int main()
 {
+  mensagemDeBoasVindas();
   int checkout = login();
   if (checkout == 1)
   {
