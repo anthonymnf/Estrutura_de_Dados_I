@@ -4,11 +4,11 @@
 
 // Funções pra se adicionar:
 // (X) Login;
-// - Modo cliente e admin;
+// (X) Modo cliente e admin;
 //  (X) No modo admin terá: cadastrar, listar, editar e excluir
 //  (X) No modo cliente terá: Simulação de comprar, listar produtos, Ordenar produtos por preço. Na simulação de compra diminuir a quantidade de estoque, buscar por um remédio em específico;
 // - Verificação de validade de e-mail: o programa deve permitir que se verifique a validade do e-mail de um usuário. Para ser válido, o e-mail precisa conter o caractere @ e a quantidade de caracteres dele precisa se menor que 80. Além disso, para ser válido, NÃO pode haver outro e-mail cadastrado no sistema com o mesmo valor. Isso pode ser feito antes do login
-// - Mensagem de boas vindas: o programa deve apresentar uma mensagem de boas-vindas para o usuário. A mensagem de boas-vindas deve estar relacionado ao tema da aplicação/projeto escolhido pelo aluno.
+// (x) Mensagem de boas vindas: o programa deve apresentar uma mensagem de boas-vindas para o usuário. A mensagem de boas-vindas deve estar relacionado ao tema da aplicação/projeto escolhido pelo aluno.
 
 struct Remedio
 {
@@ -49,6 +49,7 @@ void menuClient()
   printf("===================\n");
 }
 
+// Função responsável por cadastrar remédios em pharma.b
 void cadastrar()
 {
   FILE *file = fopen("pharma.b", "ab");
@@ -59,6 +60,7 @@ void cadastrar()
   fclose(file);
 }
 
+// Função responsável por buscar remédios em pharma.b
 void buscar(int cod)
 {
   FILE *file = fopen("pharma.b", "rb");
@@ -82,6 +84,7 @@ void buscar(int cod)
   fclose(file);
 }
 
+// Função responsável por listar os remédios de pharma.b
 void listar()
 {
   FILE *file = fopen("pharma.b", "rb");
@@ -96,6 +99,7 @@ void listar()
   fclose(file);
 }
 
+// Função responsável por contar a quantidade de remédios cadastrados em pharma.b
 int tamanho()
 {
   FILE *file = fopen("pharma.b", "rb");
@@ -109,6 +113,7 @@ int tamanho()
   return cont;
 }
 
+// Função responsável por excluir um remédio em pharma.b, através do seu código
 void excluir(int cod)
 {
   int n = tamanho();
@@ -131,6 +136,7 @@ void excluir(int cod)
   fclose(file);
 }
 
+// Função responsável por editar um remédio em pharma.b, através do seu código
 void editar(int cod)
 {
   int n = tamanho();
@@ -175,6 +181,7 @@ void editar(int cod)
   fclose(file);
 }
 
+// Partes responsáveis pelo login nos dois modos
 struct Login
 {
   char email[81];
@@ -197,6 +204,7 @@ int login()
   Login user;
   int verificado = 0;
   // Chamar aqui a validação de email, essa função vai retornar um número q vou tratado com o if else
+  printf("Insira um email valido e ainda nao cadastrado no sistema\n");
   while (verificado == 0)
   {
     printf("Informe o id: ");
