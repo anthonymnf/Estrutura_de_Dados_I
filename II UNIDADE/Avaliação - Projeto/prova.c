@@ -230,7 +230,7 @@ int login()
 
   return 0;
 }
-
+// Função responsável por tratar o modo adm
 void admMode()
 {
   int op;
@@ -277,6 +277,7 @@ void admMode()
   }
 }
 
+// Função que faz o carrinho de compras e simula uma compra de remedios, é fornecido pelo cliente o código e a quantidade do remédio
 float carrinhoDeCompras(int cod, int quant)
 {
   // Retirando remedios do estoque
@@ -325,6 +326,7 @@ float carrinhoDeCompras(int cod, int quant)
   return 0;
 }
 
+// Função que busca os remédios que estão abaixo de um valor X de dinheiro fornecido pelo cliente
 void remediosBaratos(float x)
 {
   FILE *file = fopen("pharma.b", "rb");
@@ -347,7 +349,7 @@ void remediosBaratos(float x)
   }
   fclose(file);
 }
-
+// Função responsável por tratar o modo cliente
 void clientMode()
 {
   int op;
@@ -400,6 +402,7 @@ void clientMode()
   }
 }
 
+// Função que exibi a mensagem de boas vindas do programa
 void mensagemDeBoasVindas()
 {
   printf("Bem-vindo a VitalFarMed, onde saude e bem-estar se encontram em cada visita! Aqui, nossa missao e cuidar de voce e de sua familia com dedicacao e expertise. Entre em nossa loja virtual e descubra uma ampla variedade de produtos farmaceuticos de qualidade, aliados a um atendimento personalizado que faz toda a diferenca. Na VitalFarMed, sua saude e nossa prioridade numero um. Juntos, vamos trilhar o caminho para uma vida mais saudavel e feliz. Seja bem-vindo a sua nova casa de saude e bem-estar!\n");
