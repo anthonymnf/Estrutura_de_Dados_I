@@ -25,6 +25,8 @@ void menuAdmin()
   printf("4 - Quantidade de remedios\n");
   printf("5 - Excluir um remedio\n");
   printf("6 - Editar um remedio\n");
+  printf("7 - Remedios com o estoque acabando\n");
+  printf("8 - Cadastrar promocao\n");
   printf("0 - Sair\n");
   printf("===================\n");
 }
@@ -39,6 +41,7 @@ void menuClient()
   printf("3 - Buscar remedio\n");
   printf("4 - Quantidade de remedios\n");
   printf("5 - Remedios que cabem no seu bolso!\n");
+  printf("6 - Buscar remedios em promocao\n");
   printf("0 - Sair\n");
   printf("===================\n");
 }
@@ -51,6 +54,17 @@ void cadastrar()
   printf("Informe os dados do remedio na ordem: Codigo Nome Preco e Estoque\n");
   scanf("%d %s %f %d", &a.codigo, a.nome, &a.preco, &a.estoque);
   fwrite(&a, sizeof(Remedio), 1, file);
+  fclose(file);
+}
+
+// Função responsável por cadastrar remédios em promoçaõ no arquivo promocao.b
+void cadastrarPromocao()
+{
+  FILE *file = fopen("promocao.b", "ab");
+  int a;
+  printf("Informe o codigo do remedio em promocao:\n");
+  scanf("%d", &a);
+  fwrite(&a, sizeof(int), 1, file);
   fclose(file);
 }
 
@@ -74,6 +88,19 @@ void buscar(int cod)
   if (entrou == 0)
   {
     printf("Remedio nao encontrado\n");
+  }
+  fclose(file);
+}
+
+// Função responsável por buscar remédios em promoção no arquivo promocao.b
+void buscarPromocao()
+{
+  FILE *file = fopen("promocao.b", "rb");
+  int a;
+  printf("Remedios em promocao:\n");
+  while (fread(&a, sizeof(int), 1, file))
+  {
+    buscar(a);
   }
   fclose(file);
 }
@@ -105,6 +132,31 @@ int tamanho()
   }
   fclose(file);
   return cont;
+}
+
+// Função que checa os remédios com o estoque acabando, aqui o parametro para saber que está acabando é ter menos de 50 no estoque
+void estoqueAcabando()
+{
+  FILE *file = fopen("pharma.b", "rb");
+  Remedio a;
+  int entrou = 0;
+  printf("Remedios com o estoque acabando: \n");
+  while (fread(&a, sizeof(Remedio), 1, file))
+  {
+    if (a.estoque < 50)
+    {
+      printf("\nNome: %s\n", a.nome);
+      printf("- Codigo: %d\n", a.codigo);
+      printf("- Quantidade em estoque: %d\n", a.estoque);
+      entrou++;
+    }
+  }
+  if (entrou == 0)
+  {
+    printf("Estoque cheio, nenhum remedio com menos de 50 unidades no estoque.\n");
+  }
+
+  fclose(file);
 }
 
 // Função responsável por excluir um remédio em pharma.b, através do seu código
@@ -347,6 +399,14 @@ void admMode()
       scanf("%d", &cod);
       editar(cod);
     }
+    else if (op == 7)
+    {
+      estoqueAcabando();
+    }
+    else if (op == 8)
+    {
+      cadastrarPromocao();
+    }
     menuAdmin();
     scanf("%d", &op);
   }
@@ -472,6 +532,11 @@ void clientMode()
       scanf("%f", &x);
       remediosBaratos(x);
     }
+    else if (op == 6)
+    {
+      buscarPromocao();
+    }
+
     menuClient();
     scanf("%d", &op);
   }
