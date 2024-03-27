@@ -46,7 +46,7 @@ int verificarEmail(const char *email)
   return 1; // Email válido
 }
 
-int main()
+int email()
 {
   char email[MAX_EMAIL_LENGTH];
   int valido = 0;

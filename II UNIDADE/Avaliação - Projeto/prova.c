@@ -1,14 +1,8 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-// Projeto de um sistema de fármacia (EM CONSTRUÇÃO)
-
-// Funções pra se adicionar:
-// (X) Login;
-// (X) Modo cliente e admin;
-//  (X) No modo admin terá: cadastrar, listar, editar e excluir
-//  (X) No modo cliente terá: Simulação de comprar, listar produtos, Ordenar produtos por preço. Na simulação de compra diminuir a quantidade de estoque, buscar por um remédio em específico;
-// - Verificação de validade de e-mail: o programa deve permitir que se verifique a validade do e-mail de um usuário. Para ser válido, o e-mail precisa conter o caractere @ e a quantidade de caracteres dele precisa se menor que 80. Além disso, para ser válido, NÃO pode haver outro e-mail cadastrado no sistema com o mesmo valor. Isso pode ser feito antes do login
-// (x) Mensagem de boas vindas: o programa deve apresentar uma mensagem de boas-vindas para o usuário. A mensagem de boas-vindas deve estar relacionado ao tema da aplicação/projeto escolhido pelo aluno.
+// Projeto de um sistema de fármacia (FINALIZADO)
 
 struct Remedio
 {
@@ -181,6 +175,88 @@ void editar(int cod)
   fclose(file);
 }
 
+// Partes responsáveis pela verificação do email
+#define MAX_EMAIL_LENGTH 80
+
+// Função para verificar se o email já existe no arquivo
+int verificarEmailExistente(const char *email)
+{
+  FILE *arquivo = fopen("emails.txt", "r");
+  if (arquivo == NULL)
+  {
+    return 0; // Arquivo não existe, então email não está cadastrado
+  }
+  char linha[MAX_EMAIL_LENGTH];
+  while (fgets(linha, MAX_EMAIL_LENGTH, arquivo) != NULL)
+  {
+    // Remover o caractere de nova linha de fgets
+    linha[strcspn(linha, "\n")] = 0;
+    if (strcmp(linha, email) == 0)
+    {
+      fclose(arquivo);
+      return 1; // Email já cadastrado
+    }
+  }
+  fclose(arquivo);
+  return 0; // Email não encontrado no arquivo
+}
+
+// Função para verificar a validade do email
+int verificarEmail(const char *email)
+{
+  if (strlen(email) >= MAX_EMAIL_LENGTH)
+  {
+    return 0; // Email muito longo
+  }
+  char *posArroba = strchr(email, '@');
+  if (posArroba == NULL)
+  {
+    return 0; // Email não contém @
+  }
+  if (verificarEmailExistente(email))
+  {
+    return 0; // Email já cadastrado
+  }
+  return 1; // Email válido
+}
+
+int email()
+{
+  char email[MAX_EMAIL_LENGTH];
+  int valido = 0;
+
+  while (!valido)
+  {
+    printf("Digite seu email: ");
+    fgets(email, MAX_EMAIL_LENGTH, stdin);
+    // Remover o caractere de nova linha de fgets
+    email[strcspn(email, "\n")] = 0;
+
+    if (verificarEmail(email))
+    {
+      valido = 1;
+    }
+    else
+    {
+      printf("Email invalido ou ja cadastrado. Por favor, tente novamente.\n");
+    }
+  }
+
+  // Agora que temos um email válido, vamos adicioná-lo ao arquivo
+  FILE *arquivo = fopen("emails.txt", "a");
+  if (arquivo == NULL)
+  {
+    printf("Erro ao abrir o arquivo para escrita.\n");
+    return 1;
+  }
+  fprintf(arquivo, "%s\n", email);
+  fclose(arquivo);
+
+  printf("Email cadastrado com sucesso!\n");
+
+  return 0;
+}
+
 // Partes responsáveis pelo login nos dois modos
 struct Login
 {
@@ -197,14 +273,13 @@ int login()
   printf("INFORMES PARA REUDISMAM\n");
   printf("As funcoes estao divididas em dois modos: Admin Mode e Client Mode, cada uma com suas funcoes especificas\n");
   printf("Credenciais para entrar nos modos:\n");
-  printf("- Email valido\n");
+  printf("- Email valido e ainda nao cadastrado\n");
   printf("- Para entrar no Adm Mode e Id = 1 e Senha = 11\n");
   printf("- Para entrar no Client Mode e Id = 2 e Senha = 22\n");
   printf("---------------------\n");
   Login user;
-  int verificado = 0;
-  // Chamar aqui a validação de email, essa função vai retornar um número q vou tratado com o if else
-  printf("Insira um email valido e ainda nao cadastrado no sistema\n");
+  int verificado = email();
+
   while (verificado == 0)
   {
     printf("Informe o id: ");
